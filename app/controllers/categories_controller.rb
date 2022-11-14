@@ -5,11 +5,11 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @categories = Category.find(params[:id])
+    @category = Category.find(params[:id])
   end
 
   def create
-    category = Category.find_or_initialize_by(name: params[:id])
+    category = Category.find_or_initialize_by(name: params[:name])
     if category.save
       render json: {}, status: 201
     else
