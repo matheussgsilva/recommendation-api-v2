@@ -18,24 +18,26 @@ ActiveRecord::Schema.define(version: 2022_11_13_232209) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "coments", force: :cascade do |t|
+  create_table "comments", force: :cascade do |t|
     t.text "content"
     t.integer "recommendation_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["recommendation_id"], name: "index_coments_on_recommendation_id"
-    t.index ["user_id"], name: "index_coments_on_user_id"
+    t.index ["recommendation_id"], name: "index_comments_on_recommendation_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "recommendations", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.text "description"
     t.string "cover_url"
     t.integer "category_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_recommendations_on_category_id"
+    t.index ["user_id"], name: "index_recommendations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -53,7 +55,8 @@ ActiveRecord::Schema.define(version: 2022_11_13_232209) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "coments", "recommendations"
-  add_foreign_key "coments", "users"
+  add_foreign_key "comments", "recommendations"
+  add_foreign_key "comments", "users"
   add_foreign_key "recommendations", "categories"
+  add_foreign_key "recommendations", "users"
 end
