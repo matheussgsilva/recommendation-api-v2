@@ -31,3 +31,6 @@ livro.recommendations.create(
   title: "O Senhor dos Aneis",
   user: matheus
 )
+
+p "Created #{User.count} users"
+p "Created #{Category.count} categories"
